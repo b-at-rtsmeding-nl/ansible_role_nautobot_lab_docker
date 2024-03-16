@@ -1,0 +1,14 @@
+---
+- name: Destroy - remove containers
+  hosts: all
+  become: false
+  tasks:
+    - name: Include default vars
+      ansible.builtin.include_vars:
+        dir: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') }}/defaults/"
+        extensions:
+          - "yml"
+#    - name: Remove default
+#      community.docker.docker_container:
+#        name: "{{ DOCKERAPP__name }}"
+#        state: absent

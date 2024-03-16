@@ -1,0 +1,22 @@
+---
+galaxy_info:
+  role_name: DOCKERAPP_docker
+  author: bsmeding
+  description: Role to install DOCKERAPP in Docker container
+  company: "b@rtsmeding.nl"
+  license: "license (BSD, MIT)"
+  min_ansible_version: '2.10'
+  platforms:
+    - name: Fedora
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - all
+  galaxy_tags:
+    - docker
+    - DOCKERAPP
+dependencies: []

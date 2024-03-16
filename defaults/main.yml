@@ -1,0 +1,60 @@
+---
+container_time_zone: 'Europe/Amsterdam'
+DOCKERAPP__name: DOCKERAPP
+DOCKERAPP__image: DOCKERAPP:2.1
+DOCKERAPP__port_http: 8080
+DOCKERAPP__port_https: 8444
+DOCKERAPP__home: "/opt/{{ DOCKERAPP__name }}"
+DOCKERAPP__remove_existing_container: false # DO NOT USE WHEN RUNNING PRODUCTION
+DOCKERAPP__pull_image: true
+DOCKERAPP__log_level: 'WARNING' # DEBUG  'INFO'    'WARNING'
+DOCKERAPP__network_mode:
+DOCKERAPP__network_name: DOCKERAPP
+# DOCKERAPP__network_cidr: 172.16.20.0/26
+DOCKERAPP__pip_install_extra_args: ''
+DOCKERAPP__networks:
+  - name: "{{ DOCKERAPP__network_name }}"
+DOCKERAPP__env: {}
+DOCKERAPP__log_driver: json-file
+DOCKERAPP__log_options:
+DOCKERAPP__remove_existing_home_dir: false
+DOCKERAPP__directories:
+  - path: "{{ DOCKERAPP__home }}"
+    mode: "0760"
+    owner: "{{ DOCKERAPP__container_uid | default('root') }}"
+    group: "{{ DOCKERAPP__container_gid | default('root') }}"
+  - path: "{{ DOCKERAPP__home }}/config"
+    mode: "0760"
+    owner: "{{ DOCKERAPP__container_uid | default('root') }}"
+    group: "{{ DOCKERAPP__container_gid | default('root') }}"
+  - path: "{{ DOCKERAPP__home }}/config/custom_jinja_filters"
+    mode: "0760"
+    owner: "{{ DOCKERAPP__container_uid | default('root') }}"
+    group: "{{ DOCKERAPP__container_gid | default('root') }}"    
+  - path: "{{ DOCKERAPP__home }}/logs"
+    mode: "0760"
+    owner: "{{ DOCKERAPP__container_uid | default('root') }}"
+    group: "{{ DOCKERAPP__container_gid | default('root') }}"
+  - path: "{{ DOCKERAPP__home }}/media"
+    mode: "0760"
+    owner: "{{ DOCKERAPP__container_uid | default('root') }}"
+    group: "{{ DOCKERAPP__container_gid | default('root') }}"
+  - path: "{{ DOCKERAPP__home }}/jobs"
+    mode: "0760"
+    owner: "{{ DOCKERAPP__container_uid | default('root') }}"
+    group: "{{ DOCKERAPP__container_gid | default('root') }}"
+DOCKERAPP__ports:
+  - "{{ DOCKERAPP__port_http }}:8080"
+  - "{{ DOCKERAPP__port_https }}:8443"
+DOCKERAPP__directory_volumes:
+  - "{{ DOCKERAPP__home }}/config:/opt/DOCKERAPP/"
+DOCKERAPP__file_volumes: []
+DOCKERAPP__default_env:
+  TZ: "{{ container_time_zone | default('Europe/Paris') }}"
+  PUID: "{{ DOCKERAPP__container_uid | default(docker_uid) |default(1040) }}"
+  GUID: "{{ DOCKERAPP__container_gid | default(docker_gid) |default(1001) }}"
+
+
+
+
+DOCKERAPP__pip_install_extra_args: ''
